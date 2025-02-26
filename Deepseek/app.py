@@ -31,12 +31,19 @@ config = {
 }
 
 
-agent = Agent(
-    name="Knwoledge Agent",
-    knowledge=["KAG-Research-paper.pdf"],
-    knowledge_config=config,
-    user_id="user1",
-    llm="deepseek-r1"
-)
+try:
+    agent = Agent(
+        name="Knowledge Agent",
+        instructions="You answers questions based on provided knowledge",
+        knowledge=["KAG-Research-paper.pdf"],
+        knowledge_config=config,
+        user_id="user1",
+        llm="deepseek-r1"
+    )
+    agent.start("Generate python code for random numbers")
+except Exception as e:
+    import traceback
+    print(f"An error occurred: {e}")
+    traceback.print_exc()
 
-agent.start("What is KAG in one line?")
+agent.start("Generate python code for random numbers")
